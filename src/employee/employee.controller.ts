@@ -20,17 +20,17 @@ export class EmployeeController {
     async findOne(@Param() params) {
         // tslint:disable-next-line:no-console
         console.log(params.name);
-        return this.employeeService.findOne(params.name)
+        return this.employeeService.findOne(params.name);
+    }
+
+    @Post('create')
+    async create(@Body() employee: Employee) {
+        return this.employeeService.create(employee)
             .then(res => {
                 return 'create employee ...done';
             })
             .catch(err => {
                 return err;
             });
-    }
-
-    @Post('create')
-    async create(@Body() employee: Employee) {
-        return this.employeeService.create(employee);
     }
 }

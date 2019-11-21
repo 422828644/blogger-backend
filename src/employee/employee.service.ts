@@ -17,7 +17,7 @@ export class EmployeeService {
         return this.employeeRepository.save(employee);
     }
 
-    async findOne(name: string): Promise<Employee> {
+    async findOne(name: string) {
         return await this.employeeRepository.findOne({name});
     }
 }

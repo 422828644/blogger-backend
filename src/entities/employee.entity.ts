@@ -12,8 +12,11 @@ export class Employee {
     @Column()
     age: number;
 
-    @Column()
+    @Column({nullable: true})
     address: string;
+
+    @Column()
+    sex: number;
 
     @ManyToOne(type => Company, company => company.employees, {cascade: true})
     @JoinTable()
