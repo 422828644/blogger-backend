@@ -1,10 +1,12 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import {BaseEntity} from './base.entity';
+import {ApiModelProperty} from '@nestjs/swagger';
 
 @Entity()
 export class User extends BaseEntity {
 
     @Column({unique: true})
+    @ApiModelProperty({})
     account: string;
 
     @Column()
