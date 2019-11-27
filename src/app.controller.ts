@@ -1,15 +1,35 @@
-import {Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import {AppService} from './app.service';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
+import {BaseController} from './base.controller';
+import {UserService} from './bussiness/user/user.service';
+import {LoginModel} from './model/loginModel';
 
 @Controller()
 @ApiUseTags('默认')
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class AppController extends BaseController {
+    constructor(
+        private readonly appService: AppService,
+        private readonly userService: UserService,
+    ) {
+        super();
+    }
 
-  @Get()
-  @ApiOperation({title: '首页'})
-  getHello(): string {
-    return this.appService.getHello();
-  }
+    @Get()
+    @ApiOperation({title: '首页'})
+    async getHello() {
+        return this.appService.getHello();
+    }
+
+    @Post()
+    @ApiOperation({title: '登录'})
+    async login(@Body() userModel: LoginModel) {
+        return await this.userService.login(userModel)
+            .then(res => {
+                return this.success('', res);
+            })
+            .catch(err => {
+                return this.fail(err);
+            });
+    }
 }

@@ -2,8 +2,10 @@ import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
-import {EmployeeModule} from './employee/employee.module';
-import {UserModule} from './user/user.module';
+import {UserModule} from './bussiness/user/user.module';
+import {PassportModule} from '@nestjs/passport';
+import {JwtModule} from '@nestjs/jwt';
+import { AuthModule } from './bussiness/auth/auth.module';
 
 @Module({
     imports: [
@@ -17,8 +19,15 @@ import {UserModule} from './user/user.module';
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
         }),
-        EmployeeModule,
+        PassportModule.register({defaultStrategy: 'jwt'}),
+        JwtModule.register({
+            secretOrPrivateKey: 'secretKey',
+            signOptions: {
+                expiresIn: 3600,
+            },
+        }),
         UserModule,
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
