@@ -5,17 +5,18 @@ import {LoginModel} from '../../model/loginModel';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService,
-                private readonly jwtService: JwtService) {
-    }
+    constructor(
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService,
+    ) {}
 
-    async login(loginModel: LoginModel) {
+    async signIn(loginModel: LoginModel) {
         const {account, password} = loginModel;
         const result = await this.userService.findOne(account);
         return this.jwtService.sign(loginModel);
     }
 
     async validateUser(payload: any) {
-        return {};
+        return await this.userService.findOneByToken(payload.token);
     }
 }
