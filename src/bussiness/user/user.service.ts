@@ -4,7 +4,7 @@ import {User} from '../../entities/user.entity';
 import {Repository} from 'typeorm';
 import {Utils} from '../../utils/common.utils';
 import * as crypto from 'crypto-js';
-import {LoginModel} from '../../model/loginModel';
+import {UserModel} from '../../model/userModel';
 
 @Injectable()
 export class UserService {
@@ -42,7 +42,7 @@ export class UserService {
         return await this.userRepository.find();
     }
 
-    async login(userModel: LoginModel) {
+    async signIn(userModel: UserModel) {
         const user = await this.userRepository.findOne({account: userModel.account});
         if (user) {
             const passwordMd5 = crypto.MD5(userModel.password);

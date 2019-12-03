@@ -3,7 +3,7 @@ import {AppService} from './app.service';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
 import {BaseController} from './base.controller';
 import {UserService} from './bussiness/user/user.service';
-import {LoginModel} from './model/loginModel';
+import {UserModel} from './model/userModel';
 
 @Controller()
 @ApiUseTags('默认')
@@ -23,8 +23,8 @@ export class AppController extends BaseController {
 
     @Post()
     @ApiOperation({title: '登录'})
-    async login(@Body() userModel: LoginModel) {
-        return await this.userService.login(userModel)
+    async login(@Body() userModel: UserModel) {
+        return await this.userService.signIn(userModel)
             .then(res => {
                 return this.success('', res);
             })

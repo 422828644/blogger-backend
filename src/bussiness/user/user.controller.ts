@@ -1,8 +1,9 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from '@nestjs/common';
 import {UserService} from './user.service';
 import {User} from '../../entities/user.entity';
 import {BaseController} from '../../base.controller';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
+import {AuthGuard} from '@nestjs/passport';
 
 @Controller('user')
 @ApiUseTags('用户模块')
@@ -62,7 +63,8 @@ export class UserController extends BaseController {
 
     @Get(':account')
     @ApiOperation({title: '用户查询'})
-    async queryOne(@Param('account') account: string) {
+    @UseGuards(AuthGuard('bearer'))
+    async findOne(@Param('account') account: string) {
         if (!account) {
             return this.fail('帐号不为空');
         }
@@ -77,7 +79,8 @@ export class UserController extends BaseController {
 
     @Get('all')
     @ApiOperation({title: '查询所有用户'})
-    async queryAll() {
+    @UseGuards(AuthGuard('bearer'))
+    async findAll() {
         return this.userService.findAll()
             .then(res => {
                 return this.success('查询成功', res);

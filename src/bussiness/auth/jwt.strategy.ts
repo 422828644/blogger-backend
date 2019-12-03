@@ -6,10 +6,7 @@ import {Injectable, UnauthorizedException} from '@nestjs/common';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly authService: AuthService) {
-        super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: 'secretKey',
-        });
+        super();
     }
 
     async validate(payload: any) {
