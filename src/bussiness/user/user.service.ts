@@ -1,17 +1,19 @@
-import {Injectable, CacheStore} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {User} from '../../entities/user.entity';
 import {Repository} from 'typeorm';
 import {Utils} from '../../utils/common.utils';
 import * as crypto from 'crypto-js';
 import {UserModel} from '../../model/userModel';
+import {RedisService} from 'nestjs-redis';
+import {fail, rejects} from 'assert';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
-        private readonly cacheStore: CacheStore,
+        private readonly redisService: RedisService,
     ) {
     }
 
@@ -51,10 +53,10 @@ export class UserService {
                 return user;
             }
         }
-        return null;
+        return fail('用户名密码错误');
     }
 
     async findOneByToken(token: string) {
-        return this.cacheStore.get(token);
+        return await this.redisService.getClient('dev').get(token);
     }
 }

@@ -63,7 +63,7 @@ export class UserController extends BaseController {
 
     @Get(':account')
     @ApiOperation({title: '用户查询'})
-    @UseGuards(AuthGuard('bearer'))
+    @UseGuards(AuthGuard('local'))
     async findOne(@Param('account') account: string) {
         if (!account) {
             return this.fail('帐号不为空');
@@ -79,7 +79,7 @@ export class UserController extends BaseController {
 
     @Get('all')
     @ApiOperation({title: '查询所有用户'})
-    @UseGuards(AuthGuard('bearer'))
+    @UseGuards(AuthGuard('local'))
     async findAll() {
         return this.userService.findAll()
             .then(res => {

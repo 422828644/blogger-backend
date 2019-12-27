@@ -1,12 +1,12 @@
-import {CacheModule, Module} from '@nestjs/common';
-import {TypeOrmModule} from '@nestjs/typeorm';
+import {Module} from '@nestjs/common';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {UserModule} from './bussiness/user/user.module';
 import {PassportModule} from '@nestjs/passport';
 import {JwtModule} from '@nestjs/jwt';
-import { AuthModule } from './bussiness/auth/auth.module';
-import * as redisStore from 'cache-manager-redis-store';
+import {AuthModule} from './bussiness/auth/auth.module';
+import {RedisModule} from 'nestjs-redis';
+import {TypeOrmModule} from '@nestjs/typeorm';
 
 @Module({
     imports: [
@@ -20,20 +20,10 @@ import * as redisStore from 'cache-manager-redis-store';
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
         }),
-        CacheModule.register({
-            store: redisStore,
-            host: 'localhost',
-            port: 6379,
-            ttl: 10,
-            max: 15,
+        RedisModule.register({
+            url: 'redis://@127.0.0.1:6379',
         }),
         PassportModule.register({defaultStrategy: 'jwt'}),
-        JwtModule.register({
-            secretOrPrivateKey: 'secretKey',
-            signOptions: {
-                expiresIn: 3600,
-            },
-        }),
         UserModule,
         AuthModule,
     ],

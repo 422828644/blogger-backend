@@ -1,9 +1,10 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
 import {AppService} from './app.service';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
 import {BaseController} from './base.controller';
 import {UserService} from './bussiness/user/user.service';
 import {UserModel} from './model/userModel';
+import {AuthGuard} from '@nestjs/passport';
 
 @Controller()
 @ApiUseTags('默认')
@@ -21,15 +22,15 @@ export class AppController extends BaseController {
         return this.appService.getHello();
     }
 
-    @Post()
     @ApiOperation({title: '登录'})
+    @Post('auth/login')
     async login(@Body() userModel: UserModel) {
         return await this.userService.signIn(userModel)
             .then(res => {
                 return this.success('', res);
             })
             .catch(err => {
-                return this.fail(err);
+                return this.fail(err.message);
             });
     }
 }
