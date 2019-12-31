@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        CI = 'true'
+        CI = 'false'
     }
     stages {
         stage('Build') {
@@ -14,9 +14,9 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') {
+        stage('Run') {
             steps {
-                sh 'sh ./jenkins/scripts/test.sh'
+                sh 'sh ./jenkins/scripts/run.sh'
             }
         }
     }
