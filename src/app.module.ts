@@ -3,6 +3,7 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {UserModule} from './bussiness/user/user.module';
 import {PassportModule} from '@nestjs/passport';
+import {JwtModule} from '@nestjs/jwt';
 import {AuthModule} from './bussiness/auth/auth.module';
 import {RedisModule} from 'nestjs-redis';
 import {TypeOrmModule} from '@nestjs/typeorm';
@@ -11,7 +12,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
     imports: [
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: '172.18.0.4',
+            host: 'localhost',
             port: 3306,
             username: 'root',
             password: 'root',
@@ -20,7 +21,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
             synchronize: true,
         }),
         RedisModule.register({
-            url: 'redis://@172.18.0.3:6379',
+            url: 'redis://@localhost:6379',
         }),
         PassportModule.register({defaultStrategy: 'jwt'}),
         UserModule,
