@@ -17,6 +17,7 @@ pipeline {
         stage('Run') {
             steps {
                 sh 'sh ./jenkins/scripts/run.sh'
+                input message: '完成部署'
             }
         }
     }
