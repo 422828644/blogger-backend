@@ -11,7 +11,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
     imports: [
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: '172.18.0.4',
+            host: '0.0.0.0',
             port: 3306,
             username: 'root',
             password: 'root',
@@ -20,7 +20,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
             synchronize: true,
         }),
         RedisModule.register({
-            url: 'redis://@172.18.0.3:6379',
+            url: 'redis://@0.0.0.0:6379',
         }),
         PassportModule.register({defaultStrategy: 'jwt'}),
         UserModule,
