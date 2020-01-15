@@ -15,7 +15,7 @@ import {MessageModule} from './bussiness/message/message.module';
             host: '127.0.0.1',
             port: 3306,
             username: 'root',
-            password: 'root',
+            password: 'Abc123456!@#',
             database: 'nest',
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
