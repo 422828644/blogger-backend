@@ -1,10 +1,10 @@
-import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
-import {AppService} from './app.service';
+import {Body, Controller, Get, Header, Post} from '@nestjs/common';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
+import {AppService} from './app.service';
 import {BaseController} from './base.controller';
 import {UserService} from './bussiness/user/user.service';
 import {UserModel} from './model/userModel';
-import {AuthGuard} from '@nestjs/passport';
+import {AllowHeader} from './tags/allow-header.decorator';
 
 @Controller()
 @ApiUseTags('默认')

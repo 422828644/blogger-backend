@@ -5,9 +5,10 @@
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
+    "init": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -36,6 +37,7 @@
     "cache-manager-redis-store": "^1.5.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
+    "cors": "^2.8.5",
     "crypto-js": "^3.1.9-1",
     "eslint": "^6.8.0",
     "mysql": "^2.17.1",
@@ -48,6 +50,7 @@
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
     "swagger-ui-express": "^4.1.2",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typeorm": "^0.2.20",
     "typescript": "^3.6.3"
   },
@@ -62,16 +65,17 @@
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
     "mysql": "^2.17.1",
+    "node-sass": "^4.13.0",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
-    "ts-loader": "^6.2.0",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
     "typeorm": "^0.2.20",
     "typescript": "^3.6.3",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-node-externals": "^1.7.2"
   },
@@ -91,5 +95,18 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestjs/typescript-starter.git"
+  },
+  "author": "lxb",
+  "bugs": {
+    "url": "https://github.com/nestjs/typescript-starter/issues"
+  },
+  "homepage": "https://github.com/nestjs/typescript-starter#readme"
 }

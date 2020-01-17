@@ -1,11 +1,17 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
+import * as cors from 'cors';
 
 declare const module: any;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    app.use(cors({
+        origin: 'http://localhost:8080',
+        credentials: true
+    }));
 
     const options = new DocumentBuilder()
         .setTitle('blogger')
