@@ -35,6 +35,7 @@ export class AppController extends BaseController {
             });
     }
 
+    @ApiOperation({title: 'webhook'})
     @Post('/github-webhooks')
     async webhooks(@Req() req, @Res() res) {
         const reg = /^sha1=/;
