@@ -10,6 +10,7 @@ import {UserModel} from './model/userModel';
 @ApiUseTags('默认')
 export class AppController extends BaseController {
     private SECRET_TOKEN: 'ecP6bWXJfnwhSPzz';
+
     constructor(
         private readonly appService: AppService,
         private readonly userService: UserService,
@@ -59,5 +60,10 @@ export class AppController extends BaseController {
             res.end('unauthorized');
             return;
         }
+    }
+
+    @Get('/test')
+    async test() {
+        return this.success();
     }
 }
