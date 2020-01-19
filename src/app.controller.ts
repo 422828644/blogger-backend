@@ -9,14 +9,14 @@ import {UserModel} from './model/userModel';
 @Controller()
 @ApiUseTags('默认')
 export class AppController extends BaseController {
-    private SECRET_TOKEN: 'ecP6bWXJfnwhSPzz';
-
     constructor(
         private readonly appService: AppService,
         private readonly userService: UserService,
     ) {
         super();
     }
+
+    private readonly SECRET_TOKEN = 'ecP6bWXJfnwhSPzz';
 
     @Get()
     @ApiOperation({title: '首页'})
@@ -40,7 +40,7 @@ export class AppController extends BaseController {
     @Post('/github-webhooks')
     async webhooks(@Req() req, @Res() res) {
         const reg = /^sha1=/;
-        let sha1 = req.headers['X-Hub-Signature'];
+        let sha1 = req.headers['x-hub-signature'];
         if (reg.test(sha1)) {
             sha1 = sha1.replace(reg, '');
             const payload = JSON.stringify(req.body);
