@@ -12,9 +12,14 @@ export class MessageService {
     }
 
     async create(message: Message) {
-        const [message1, count] = await this.messageRepository.findAndCount(message);
+        const [message1, count] = await this.messageRepository.findAndCount({
+            name: message.name,
+            mobile: message.mobile,
+            mail: message.mail,
+            remark: message.remark,
+        });
         if (count > 0) {
-            return fail('重复提交');
+            throw new Error('重复提交');
         }
         return await this.messageRepository.save(message);
     }

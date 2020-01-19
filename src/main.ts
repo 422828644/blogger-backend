@@ -8,10 +8,7 @@ declare const module: any;
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    app.use(cors({
-        origin: 'http://localhost:8080',
-        credentials: true
-    }));
+    app.enableCors();
 
     const options = new DocumentBuilder()
         .setTitle('blogger')

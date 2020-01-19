@@ -25,7 +25,7 @@ export class MessageController extends BaseController {
             .catch(err => {
                 // tslint:disable-next-line:no-console
                 console.log(err);
-                return this.fail('创建失败');
+                return this.fail(err.message || '创建失败');
             });
     }
 
@@ -39,7 +39,7 @@ export class MessageController extends BaseController {
             .catch(err => {
                 // tslint:disable-next-line:no-console
                 console.log(err);
-                return this.fail('删除失败');
+                return this.fail(err.message || '删除失败');
             });
     }
 
@@ -56,7 +56,7 @@ export class MessageController extends BaseController {
             .catch(err => {
                 // tslint:disable-next-line:no-console
                 console.log(err);
-                return this.fail('更新失败');
+                return this.fail(err.message || '更新失败');
             });
     }
 
