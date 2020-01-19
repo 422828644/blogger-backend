@@ -62,7 +62,7 @@ export class AppController extends BaseController {
         }
     }
 
-    @ApiOperation({title: '测试'})
+    @ApiOperation({title: '测试123'})
     @Get('/test')
     async test() {
         return this.success();
