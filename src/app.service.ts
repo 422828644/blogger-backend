@@ -7,13 +7,21 @@ export class AppService {
         return 'Hello World!';
     }
 
-    gitPull() {
+    gitHubPull() {
         exec('cd ~/soft/', (err, stdout) => {
             console.log(stdout);
-            console.log('git success');
         });
         exec('git pull https://github.com/422828644/blogger-backend.git', (error, stdout) => {
             console.log(stdout);
         });
+    }
+
+    giteePull() {
+        exec('cd ~/front/', ((error, stdout) => {
+            console.log(stdout);
+        }))
+        exec('git pull origin master', ((error, stdout) => {
+            console.log(stdout);
+        }))
     }
 }

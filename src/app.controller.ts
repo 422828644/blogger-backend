@@ -9,10 +9,8 @@ import {UserModel} from './model/userModel';
 @Controller()
 @ApiUseTags('默认')
 export class AppController extends BaseController {
-    constructor(
-        private readonly appService: AppService,
-        private readonly userService: UserService,
-    ) {
+    constructor(private readonly appService: AppService,
+                private readonly userService: UserService,) {
         super();
     }
 
@@ -36,9 +34,9 @@ export class AppController extends BaseController {
             });
     }
 
-    @ApiOperation({title: 'webhook'})
+    @ApiOperation({title: 'backend-webhook'})
     @Post('/github-webhooks')
-    async webhooks(@Req() req, @Res() res) {
+    async githubWebhooks(@Req() req, @Res() res) {
         const reg = /^sha1=/;
         let sha1 = req.headers['x-hub-signature'];
         if (reg.test(sha1)) {
@@ -53,7 +51,33 @@ export class AppController extends BaseController {
             }
             res.writeHead(200);
             res.end('webhooks success');
-            await this.appService.gitPull();
+            await this.appService.gitHubPull();
+            return;
+        } else {
+            res.writeHead(401);
+            res.end('unauthorized');
+            return;
+        }
+    }
+
+    @ApiOperation({title: 'front-webhook'})
+    @Post('/gitee-webhooks')
+    async giteeWebhooks(@Req() req, @Res() res) {
+        const reg = /^sha1=/;
+        let sha1 = req.headers['x-hub-signature'];
+        if (reg.test(sha1)) {
+            sha1 = sha1.replace(reg, '');
+            const payload = JSON.stringify(req.body);
+            const hash = crypto.createHmac('sha1', this.SECRET_TOKEN).update(payload);
+            const token = hash.digest('hex');
+            if (token !== sha1) {
+                res.writeHead(401);
+                res.end('unauthorized');
+                return;
+            }
+            res.writeHead(200);
+            res.end('webhooks success');
+            await this.appService.giteePull();
             return;
         } else {
             res.writeHead(401);
