@@ -63,7 +63,7 @@ export class AppController extends BaseController {
     @ApiOperation({title: 'front-webhook'})
     @Post('/gitee-webhooks')
     async giteeWebhooks(@Req() req, @Res() res) {
-        const token = req.headers['X-Gitee-Token'];
+        const token = req.headers['x-gitee-token'];
         if (token) {
             if (token !== this.SECRET_TOKEN) {
                 res.writeHead(401);
