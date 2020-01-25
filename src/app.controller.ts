@@ -63,14 +63,9 @@ export class AppController extends BaseController {
     @ApiOperation({title: 'front-webhook'})
     @Post('/gitee-webhooks')
     async giteeWebhooks(@Req() req, @Res() res) {
-        const reg = /^sha1=/;
-        let sha1 = req.headers['X-Gitee-Token'];
-        if (reg.test(sha1)) {
-            sha1 = sha1.replace(reg, '');
-            const payload = JSON.stringify(req.body);
-            const hash = crypto.createHmac('sha1', this.SECRET_TOKEN).update(payload);
-            const token = hash.digest('hex');
-            if (token !== sha1) {
+        const token = req.headers['X-Gitee-Token'];
+        if (token) {
+            if (token !== this.SECRET_TOKEN) {
                 res.writeHead(401);
                 res.end('unauthorized');
                 return;
