@@ -64,7 +64,7 @@ export class AppController extends BaseController {
     @Post('/gitee-webhooks')
     async giteeWebhooks(@Req() req, @Res() res) {
         const reg = /^sha1=/;
-        let sha1 = req.headers['x-hub-signature'];
+        let sha1 = req.headers['X-Gitee-Token'];
         if (reg.test(sha1)) {
             sha1 = sha1.replace(reg, '');
             const payload = JSON.stringify(req.body);
