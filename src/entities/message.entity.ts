@@ -1,4 +1,4 @@
-import {Column, ColumnType, Entity, Long} from 'typeorm';
+import {Column, Entity} from 'typeorm';
 import {ApiModelProperty} from '@nestjs/swagger';
 import {BaseEntity} from './base.entity';
 

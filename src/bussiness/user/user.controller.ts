@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Logger, Param, Post, Put, UseGuards} from '@nestjs/common';
 import {UserService} from './user.service';
 import {User} from '../../entities/user.entity';
 import {BaseController} from '../../base.controller';
@@ -25,7 +25,7 @@ export class UserController extends BaseController {
             })
             .catch(err => {
                 // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail('创建失败');
             });
     }
@@ -39,7 +39,7 @@ export class UserController extends BaseController {
             })
             .catch(err => {
                 // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail('删除失败');
             });
     }
@@ -56,7 +56,7 @@ export class UserController extends BaseController {
             })
             .catch(err => {
                 // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail('更新失败');
             });
     }

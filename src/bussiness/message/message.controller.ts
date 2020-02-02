@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Logger, Param, Post, Put} from '@nestjs/common';
 import {BaseController} from '../../base.controller';
 import {MessageService} from './message.service';
 import {ApiOperation, ApiUseTags} from '@nestjs/swagger';
@@ -23,8 +23,7 @@ export class MessageController extends BaseController {
                 return this.success();
             })
             .catch(err => {
-                // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail(err.message || '创建失败');
             });
     }
@@ -37,8 +36,7 @@ export class MessageController extends BaseController {
                 return this.success('留言删除成功');
             })
             .catch(err => {
-                // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail(err.message || '删除失败');
             });
     }
@@ -54,8 +52,7 @@ export class MessageController extends BaseController {
                 return this.success('更新成功', res);
             })
             .catch(err => {
-                // tslint:disable-next-line:no-console
-                console.log(err);
+                Logger.debug(err);
                 return this.fail(err.message || '更新失败');
             });
     }
