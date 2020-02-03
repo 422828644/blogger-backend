@@ -8,6 +8,7 @@ import {RedisModule} from 'nestjs-redis';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {MessageModule} from './bussiness/message/message.module';
 import {CommonModule} from './bussiness/common/common.module';
+import {ContentModule} from './bussiness/content/content.module';
 
 @Module({
     imports: [
@@ -29,6 +30,7 @@ import {CommonModule} from './bussiness/common/common.module';
         AuthModule,
         MessageModule,
         CommonModule,
+        ContentModule,
     ],
     controllers: [AppController],
     providers: [AppService],

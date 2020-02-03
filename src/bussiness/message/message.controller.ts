@@ -57,7 +57,7 @@ export class MessageController extends BaseController {
             });
     }
 
-    @Get('mobile')
+    @Get('mobile/:mobile')
     @ApiOperation({title: '留言查询'})
     async find(@Param('mobile') mobile: number) {
         if (!mobile) {
