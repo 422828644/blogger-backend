@@ -9,7 +9,7 @@ export class Content extends BaseEntity {
     @ApiModelProperty({description: '代码值'})
     code: string;
 
-    @Column({nullable: true, length: 50})
+    @Column({nullable: true, length: 50, name: 'parent_code'})
     @ApiModelProperty({description: '父代码值'})
     parentCode: string;
 
