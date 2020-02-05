@@ -24,4 +24,8 @@ export class Content extends BaseEntity {
     @Column({nullable: true, length: 200})
     @ApiModelProperty({description: '图片路径'})
     url: string;
+
+    @Column({type: 'tinyint', default: 0})
+    @ApiModelProperty({description: '排序值'})
+    sort: number;
 }
