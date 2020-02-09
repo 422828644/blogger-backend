@@ -17,7 +17,7 @@ export class Content extends BaseEntity {
     @ApiModelProperty({description: '标题'})
     title: string;
 
-    @Column({nullable: true, length: 1000})
+    @Column({nullable: true, type: 'text'})
     @ApiModelProperty({description: '内容'})
     content: string;
 
