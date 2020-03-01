@@ -15,7 +15,7 @@ export class FileService {
 
     async update(file) {
         const fileName = `${Date.now()}.jpg`;
-        const writeImage = createWriteStream(join('/root', 'file', fileName));
+        const writeImage = createWriteStream(join('E:\\2.study\\1.javaspace\\backend', 'file', fileName));
         writeImage.write(file.buffer);
         const fileBean = new File();
         fileBean.originName = file.originalname;

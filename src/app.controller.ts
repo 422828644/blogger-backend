@@ -5,6 +5,7 @@ import {AppService} from './app.service';
 import {BaseController} from './base.controller';
 import {UserService} from './bussiness/user/user.service';
 import {UserModel} from './model/userModel';
+import {Base64} from 'js-base64';
 
 @Controller()
 @ApiUseTags('默认')
@@ -65,7 +66,11 @@ export class AppController extends BaseController {
     async giteeWebhooks(@Req() req, @Res() res) {
         const token = req.headers['x-gitee-token'];
         if (token) {
-            if (token !== this.SECRET_TOKEN) {
+            const timestamp = new Date().getUTCMilliseconds();
+            const stringToSign = timestamp + '\n' + this.SECRET_TOKEN;
+            const hash = crypto.createHmac('HmacSHA256', stringToSign).digest('hex');
+            const signToken = Base64.encode(hash);
+            if (token !== signToken) {
                 res.writeHead(401);
                 res.end('unauthorized');
                 return;
