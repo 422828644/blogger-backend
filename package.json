@@ -79,7 +79,7 @@
     "typeorm": "^0.2.20",
     "typescript": "^3.6.3",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
+    "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^1.7.2"
   },
   "jest": {
